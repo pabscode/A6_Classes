@@ -377,3 +377,24 @@ class MortgageTests(TestCase):
             "Frequency: Weekly -- Calculated Payment: $933.11"
         )
         self.assertEqual(actual_result,expected_result)
+
+    #__REPR__ TESTS
+
+    def test_repr_string_representation_accurate(self):
+
+        """Test to ensure a mortgage obeject's reprensentation is accurate"""
+
+        #Arrange 
+        loan_amount = 682912.43
+        rate = "FIXED_1"
+        frequency = "MONTHLY"
+        amortization = 30
+        mortgage = Mortgage(loan_amount, rate, frequency, amortization)
+
+        #Act
+        actual_result = repr(mortgage)
+
+        #Assert
+        expected_result = "Mortgage(682912.43, 0.0599, 12, 30)"
+        self.assertEqual(actual_result, expected_result)
+

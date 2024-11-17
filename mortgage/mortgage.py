@@ -154,10 +154,17 @@ class Mortgage:
 
     def __str__(self):
 
-        """Returns the string representation of Mortgage"""
+        """Returns the string representation of the Mortgage object"""
 
         return(f"Mortgage Amount: ${self.loan_amount:,.2f}\n"
                f"Rate: {self.rate.value * 100 :.2f}%\n"
                f"Amortization: {self.amortization}\n"
                f"Frequency: {self.frequency.name.capitalize()} -- "
                f"Calculated Payment: ${self.calculate_payment():,.2f}")
+    
+    def __repr__(self):
+
+        """Returns a string representation of a Mortgage object without formatting"""
+
+        return(f"Mortgage({self.loan_amount}, {self.rate.value}, {self.frequency.value}, {self.amortization})")
+
