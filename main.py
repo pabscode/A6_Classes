@@ -6,16 +6,9 @@ Edited by: Pablito Salazar
 Date: November 16, 2024
 """
 
-### REQUIREMENT
-### ADD IMPORT STATEMENT FOR THE MORTGAGE CLASS
-
 from mortgage.mortgage import Mortgage, MortgageRate, PaymentFrequency
 from mortgage.pixell_lookup import VALID_AMORTIZATION
 
-
-### REQUIREMENT
-### ENCLOSE THE FOLLOWING 'WITH OPEN' BLOCK IN A 'TRY-EXCEPT' BLOCK WHICH 
-### WILL CATCH A 'FILENOTFOUNDERROR' EXCEPTION
 try:
     with open ("data\\pixell_river_mortgages.txt","r") as input:
         print("**************************************************")
@@ -29,13 +22,8 @@ try:
                 amortization = int(items[2])
                 frequency = items[3]
 
-                ### REQUIREMENT:
-                ### INSTANTIATE A MORTGAGE OBJECT USING THE VALUES
-                ### FOR AMOUNT, RATE, FREQUENCY AND AMORTIZATION ABOVE.
                 mortgage = Mortgage(amount, rate , frequency, amortization)
                 
-                ### REQUIREMENT:
-                ### PRINT THE MORTGAGE OBJECT
                 print(mortgage)
 
             except ValueError as e:
