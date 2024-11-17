@@ -4,4 +4,101 @@ Author: {Student Name}
 Date: {Date}
 Usage: Use the tests encapsulated within this class to test the MortgagePayment class.
 """
+from unittest import TestCase
+from mortgage.mortgage import Mortgage
+from mortgage.pixell_lookup import MortgageRate, PaymentFrequency
+
+class MortgageTests(TestCase):
+    
+    """Test cases for validating the attributes in the __init__ method for the mortgage class"""
+
+    def test_invalid_loan_amount_value(self): 
+
+        """Tests that a value error is raised when the loan amount is less than or equal to zero"""
+
+        #Arrange
+        loan_amount = -5 #invalid loan amount value
+        rate = "FIXED_5"
+        frequency = "WEEKLY"
+        amortization = 10
+        
+        #Act
+        with self.assertRaises(ValueError) as context:
+            Mortgage(loan_amount,rate,frequency,amortization)
+
+        #Assert
+        self.assertEqual(str(context.exception), "Loan Amount must be positive.") 
+
+    def test_invalid_rate_value(self):
+
+        """Tests that a value error is raised when the rate value invalid """
+    
+        #Arrange
+        loan_amount = 1000 
+        rate = "INVALID_RATE" #invalid rate value
+        frequency = "WEEKLY"
+        amortization = 10
+
+        #Act
+        with self.assertRaises(ValueError) as context:
+            Mortgage(loan_amount,rate,frequency,amortization)
+
+        #Assert
+        self.assertEqual(str(context.exception), "Rate provided is invalid.") 
+
+    def test_invalid_frequency_value(self):
+
+        """Tests that a value error is raised when the frequency value is invalid """
+
+        #Arrange
+        loan_amount = 1000 
+        rate = "FIXED_5" 
+        frequency = "INVALID_FREQUENCY" # invalid frequency value
+        amortization = 10
+
+        #Act
+        with self.assertRaises(ValueError) as context:
+            Mortgage(loan_amount,rate,frequency,amortization)
+
+        #Assert
+        self.assertEqual(str(context.exception), "Frequency provided is invalid.") 
+
+    def test_invalid_amortization_value(self):
+
+        "Tests that a value error is raised when the amortization value is invalid"
+
+        #Arrange
+        loan_amount = 1000 
+        rate = "FIXED_5" 
+        frequency = "WEEKLY"
+        amortization = 0 #invalid amortization value
+
+        #Act
+        with self.assertRaises(ValueError) as context:
+            Mortgage(loan_amount,rate,frequency,amortization)
+
+        #Assert
+        self.assertEqual(str(context.exception), "Amortization provided is invalid.") 
+
+    def test_valid_mortgage(self):
+
+        """Tests that the attributes in the __init__ method are properly set when valid inputs are provided"""
+
+        #Arrange
+        loan_amount = 1000 
+        rate = "FIXED_5" 
+        frequency = "WEEKLY"
+        amortization = 5
+        # all valid inputs
+
+        #Act
+        mortgage = Mortgage(loan_amount, rate, frequency, amortization)
+
+        #Assert
+        self.assertEqual(mortgage._Mortgage__loan_amount_float, 1000)
+        self.assertEqual(mortgage._Mortgage__rate, MortgageRate.FIXED_5)
+        self.assertEqual(mortgage._Mortgage__frequency, PaymentFrequency.WEEKLY)
+        self.assertEqual(mortgage._Mortgage__amortization_value_int, 5)
+
+
 

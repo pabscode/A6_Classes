@@ -20,8 +20,13 @@ class Mortgage:
         string_frequency_value(string) the frequency of payment stored in a string
         amortization_value_int(int) the amortization period stored in a string
 
-        Raises:
-            ValueError: that the loan amount must be positive, the Rate provided must be valid
+        Raises: 
+            ValueError: 
+            the loan amount must be positive, 
+            the rate provided must be valid,
+            the frequency provided must be valid,
+            the amortization period provided is valid
+
 
         """
         if loan_amount_float <= 0: #validates that the loan amount is not less that or equal to zero
