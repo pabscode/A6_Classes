@@ -25,7 +25,7 @@ class Mortgage:
             the loan amount must be positive, 
             the rate provided must be valid,
             the frequency provided must be valid,
-            the amortization period provided is valid
+            the amortization period provided is invalid
 
 
         """
@@ -48,3 +48,20 @@ class Mortgage:
             # if the amortization value is not in the Valid Amortization set a value error is raised.
             raise ValueError("Amortization provided is invalid.")
         self.__amortization_value_int = amortization_value_int
+
+        
+    @property
+    def loan_amount(self):
+
+        """Gets the loan amount"""
+
+        return self.__loan_amount_float
+
+    @loan_amount.setter
+    def loan_amount(self,value: float):
+
+        """Sets the loan amount and checks for validation"""
+
+        if value <= 0:
+            raise ValueError("Loan Amount must be positive.")
+        self.__loan_amount_float = value

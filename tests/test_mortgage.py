@@ -100,5 +100,49 @@ class MortgageTests(TestCase):
         self.assertEqual(mortgage._Mortgage__frequency, PaymentFrequency.WEEKLY)
         self.assertEqual(mortgage._Mortgage__amortization_value_int, 5)
 
+    #Loan Amount Accessor & Mutator TEST
+
+    def test_loan_amount_negative(self):
+
+        """Tests that a value error is raised when the loan amount is changed into a negative value"""
+
+        #Arrange
+        mortgage = Mortgage(1000, "FIXED_5", "WEEKLY", 5) #all valid inputs
+
+        #Act
+        with self.assertRaises(ValueError) as context:
+            mortgage.loan_amount = -100  #change loan amount into a negative value
+        #Assert
+        self.assertEqual(str(context.exception), "Loan Amount must be positive.") 
+
+    def test_loan_amount_zero(self):
+
+        """Tests that a value error is raised when the loan amount is changed into a negative value"""
+
+        #Arrange
+        mortgage = Mortgage(1000, "FIXED_5", "WEEKLY", 5) #all valid inputs
+
+        #Act
+        with self.assertRaises(ValueError) as context:
+            mortgage.loan_amount = 0  #change loan amount into a zero
+            
+        #Assert
+        self.assertEqual(str(context.exception), "Loan Amount must be positive.") 
+
+    def test_loan_amount_positive(self):
+
+        """Tests when the loan amount is changed into another positive value"""
+
+        #Arrange
+        mortgage = Mortgage(1000, "FIXED_5", "WEEKLY", 5) #all valid inputs
+
+        #Act
+        mortgage.loan_amount = 2000 #changed loan amount into another valid positive value
+
+        #Assert
+        self.assertEqual(mortgage.loan_amount, 2000)
+    
+
+
 
 
