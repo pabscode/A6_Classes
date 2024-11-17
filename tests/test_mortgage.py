@@ -161,7 +161,7 @@ class MortgageTests(TestCase):
     def test_invalid_rate_change(self):
 
         """Tests when the mortgage rate is changed into another invalid rate"""
-        
+
         #Arrange
         mortgage = Mortgage(1000, "FIXED_5", "WEEKLY", 5) #all valid inputs
 
@@ -171,5 +171,33 @@ class MortgageTests(TestCase):
 
         #Assert
         self.assertEqual(str(context.exception), "Rate provided is invalid.") 
+
+    #PaymentFrequency Accessor & Mutator TEST
+    def test_valid_frequency_change(self):
+        """Tests when the payment frequency is changed into another valid frequency option"""
+
+        #Arrange
+        mortgage = Mortgage(1000, "FIXED_5", "WEEKLY", 5) #all valid inputs
+
+        #Act
+        mortgage.frequency = "MONTHLY" #changed into another valid frequency option
+
+        #Assert
+        self.assertEqual(mortgage.frequency, PaymentFrequency.MONTHLY)
+
+    def test_invalid_frequency_change(self):
+        """Tests when the payment frequency is changed into a invalid frequency option"""
+
+        #Arrange
+        mortgage = Mortgage(1000, "FIXED_5", "WEEKLY", 5) #all valid inputs
+
+        #Act
+        with self.assertRaises(ValueError) as context:
+            mortgage.frequency = "INVALID_FREQUENCY" #changed into an invalid frequency option
+
+        #Assert
+        self.assertEqual(str(context.exception), "Frequency provided is invalid.")
+
+
 
 
