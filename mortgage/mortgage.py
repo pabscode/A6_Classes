@@ -102,4 +102,22 @@ class Mortgage:
             self.__frequency = PaymentFrequency[frequency_value]
         except Exception as e:
             raise ValueError("Frequency provided is invalid.")
+        
 
+    #AMORTIZATION
+
+    @property
+    def amortization(self):
+
+        """Returns the value of the amortization"""
+
+        return self.__amortization_value_int
+
+    @amortization.setter
+    def amortization(self, amortization_value_int: int):
+
+        """Sets the amortization value adnd checks for validation"""
+
+        if amortization_value_int not in VALID_AMORTIZATION: 
+            raise ValueError("Amortization provided is invalid.")
+        self.__amortization_value_int = amortization_value_int
