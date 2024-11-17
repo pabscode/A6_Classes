@@ -49,7 +49,7 @@ class Mortgage:
             raise ValueError("Amortization provided is invalid.")
         self.__amortization_value_int = amortization_value_int
 
-        
+    #LOAN AMOUNT
     @property
     def loan_amount(self):
 
@@ -65,3 +65,21 @@ class Mortgage:
         if value <= 0:
             raise ValueError("Loan Amount must be positive.")
         self.__loan_amount_float = value
+
+    #RATE 
+    @property
+    def rate(self):
+
+        """Returns value of the rate"""
+
+        return self.__rate
+    
+    @rate.setter
+    def rate(self, rate_value: str):
+
+        """Sets the rate and check for validation"""
+
+        try: #assigns the rate, raising a value error if it is invalid
+            self.__rate = MortgageRate[rate_value]
+        except Exception as e:
+            raise ValueError("Rate provided is invalid.")

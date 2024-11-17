@@ -142,7 +142,34 @@ class MortgageTests(TestCase):
         #Assert
         self.assertEqual(mortgage.loan_amount, 2000)
     
+    #Rate Accessor & Mutator TEST
+
+    def test_valid_rate_change(self):
+        
+        """Tests when the mortgage rate is changed into another valid rate"""
+
+        #Arrange
+        mortgage = Mortgage(1000, "FIXED_5", "WEEKLY", 5) #all valid inputs
+
+        #Act
+        mortgage.rate = "FIXED_3" #changed into another valid rate 
+
+        #Assert
+        self.assertEqual(mortgage.rate, MortgageRate.FIXED_3)
 
 
+    def test_invalid_rate_change(self):
+
+        """Tests when the mortgage rate is changed into another invalid rate"""
+        
+        #Arrange
+        mortgage = Mortgage(1000, "FIXED_5", "WEEKLY", 5) #all valid inputs
+
+        #Act
+        with self.assertRaises(ValueError) as context:
+            mortgage.rate = "INVALID_RATE"  #change loan amount an invalid rate
+
+        #Assert
+        self.assertEqual(str(context.exception), "Rate provided is invalid.") 
 
 
