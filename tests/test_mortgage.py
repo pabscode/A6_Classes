@@ -230,6 +230,79 @@ class MortgageTests(TestCase):
         self.assertEqual(str(context.exception), "Amortization provided is invalid.")
 
 
+    #calculate_payment TEST
 
+    def test_calculate_payment_accurate(self):
 
+        """Tests the calculate payment method to ensure that the payment returned is accurate"""
 
+        #Arrange
+        loan_amount = 682912.43
+        rate = "FIXED_1"  
+        frequency = "MONTHLY"
+        amortization = 10
+        
+        mortgage = Mortgage(loan_amount, rate, frequency, amortization)
+        #Act
+        actual_payment = mortgage.calculate_payment()
+
+        #Assert
+        expected_payment_amount = 7578.30
+        self.assertAlmostEqual(actual_payment, expected_payment_amount, places = 2)
+
+    def test_calculate_payment_another_valid_rate(self):
+
+        """Tests the calculate payment method with another rate"""
+
+        #Arrange
+        loan_amount = 10000
+        rate = "FIXED_5"  #fixed rate_5 (0.0519)
+        frequency = "MONTHLY"
+        amortization = 10
+
+        mortgage = Mortgage(loan_amount, rate, frequency, amortization)
+
+        #Act 
+        actual_payment = mortgage.calculate_payment()
+
+        #Assert
+        expected_payment_amount = 106.997
+        self.assertAlmostEqual(actual_payment, expected_payment_amount, places = 2)
+
+    def test_calculate_payment_biweekly_frequency(self):
+
+        """Tests the calculate payment method with a biweekly frequency"""
+
+        #Arrange
+        loan_amount = 10000
+        rate = "FIXED_1"
+        frequency = "BI_WEEKLY" #BI_WEEKLY
+        amortization = 10
+
+        mortgage = Mortgage(loan_amount, rate, frequency, amortization)
+
+        #Act 
+        actual_payment = mortgage.calculate_payment()
+
+        #Assert
+        expected_payment_amount = 51.167
+        self.assertAlmostEqual(actual_payment, expected_payment_amount, places=2)
+
+    def test_calculate_payment_amortization_period_is_five(self):
+
+        """Tests the calculate payment method with a biweekly frequency"""
+
+        #Arrange
+        loan_amount = 10000
+        rate = "FIXED_1"
+        frequency = "MONTHLY"
+        amortization = 5 # changed to 5 
+
+        mortgage = Mortgage(loan_amount, rate, frequency, amortization)
+
+        #Act 
+        actual_payment = mortgage.calculate_payment()
+
+        #Assert
+        expected_payment_amount = 193.282
+        self.assertAlmostEqual(actual_payment, expected_payment_amount, places=2)

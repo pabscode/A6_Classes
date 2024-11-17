@@ -121,3 +121,35 @@ class Mortgage:
         if amortization_value_int not in VALID_AMORTIZATION: 
             raise ValueError("Amortization provided is invalid.")
         self.__amortization_value_int = amortization_value_int
+
+    def calculate_payment(self) -> float:
+
+        """Calculates the payment of a mortgage including the details of the amount rate frequency and amortization,
+        returns the mortgage payment amount""" 
+
+        #loan amount
+        principal_loan_amount = self.__loan_amount_float
+
+        #annual rate
+        annual_rate = self.__rate.value
+
+        #frequency
+        frequency = self.__frequency.value
+
+        #amortization (years)
+        amortization_period = self.__amortization_value_int
+
+        #interest rate (annual rate / frequency)
+        interest_rate = annual_rate / frequency
+
+        #number of payments (amortization * frequency)
+        number_of_payments = amortization_period * frequency
+
+        #using the formula provided in the assignment instructions
+        payment = principal_loan_amount *( 
+            (interest_rate * (1 + interest_rate) ** number_of_payments ) 
+            / ((1 + interest_rate) ** number_of_payments - 1 ) )
+        
+        return round(payment,3)
+
+
