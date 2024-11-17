@@ -306,3 +306,74 @@ class MortgageTests(TestCase):
         #Assert
         expected_payment_amount = 193.282
         self.assertAlmostEqual(actual_payment, expected_payment_amount, places=2)
+
+    #__STR__ TESTS
+
+    def test_str_monthly_frequency_payment(self):
+
+        """Tests the string for monthly frequency payment"""
+
+        #Arrange 
+        loan_amount = 682912.43
+        rate = "FIXED_3"
+        frequency = "MONTHLY"
+        amortization = 30
+        mortgage = Mortgage(loan_amount, rate, frequency, amortization)
+
+        #Act
+        actual_result = str(mortgage)
+
+        #Assert
+        expected_result = (
+            "Mortgage Amount: $682,912.43\n"
+            "Rate: 5.89%\n"
+            "Amortization: 30\n"
+            "Frequency: Monthly -- Calculated Payment: $4,046.23"
+        )
+        self.assertEqual(actual_result,expected_result)
+
+    def test_str_biweekly_frequency_payment(self):
+
+        """Tests the string for biweekly frequency payment"""
+
+        #Arrange 
+        loan_amount = 682912.43
+        rate = "FIXED_3"
+        frequency = "BI_WEEKLY"
+        amortization = 30
+        mortgage = Mortgage(loan_amount, rate, frequency, amortization)
+
+        #Act
+        actual_result = str(mortgage)
+
+        #Assert
+        expected_result = (
+            "Mortgage Amount: $682,912.43\n"
+            "Rate: 5.89%\n"
+            "Amortization: 30\n"
+            "Frequency: Bi_weekly -- Calculated Payment: $1,866.60"
+        )
+        self.assertEqual(actual_result,expected_result)
+
+    def test_str_weekly_frequency_payment(self):
+
+        """Tests the string for weekly frequency payment"""
+
+        #Arrange 
+        loan_amount = 682912.43
+        rate = "FIXED_3"
+        frequency = "WEEKLY"
+        amortization = 30
+        mortgage = Mortgage(loan_amount, rate, frequency, amortization)
+
+        #Act
+        actual_result = str(mortgage)
+
+        #Assert
+        expected_result = (
+            "Mortgage Amount: $682,912.43\n"
+            "Rate: 5.89%\n"
+            "Amortization: 30\n"
+            "Frequency: Weekly -- Calculated Payment: $933.11"
+        )
+        self.assertEqual(actual_result,expected_result)

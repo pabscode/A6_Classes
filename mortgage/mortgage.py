@@ -150,6 +150,14 @@ class Mortgage:
             (interest_rate * (1 + interest_rate) ** number_of_payments ) 
             / ((1 + interest_rate) ** number_of_payments - 1 ) )
         
-        return round(payment,3)
+        return payment 
 
+    def __str__(self):
 
+        """Returns the string representation of Mortgage"""
+
+        return(f"Mortgage Amount: ${self.loan_amount:,.2f}\n"
+               f"Rate: {self.rate.value * 100 :.2f}%\n"
+               f"Amortization: {self.amortization}\n"
+               f"Frequency: {self.frequency.name.capitalize()} -- "
+               f"Calculated Payment: ${self.calculate_payment():,.2f}")
